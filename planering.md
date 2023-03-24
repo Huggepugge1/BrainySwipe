@@ -1,1 +1,0 @@
-# Planering BrainySwipe - Hugo Lindström
