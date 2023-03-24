@@ -61,5 +61,20 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 ### 2.7 Säkerhet
 
 ## 3. Tidsplanering - Deadlines
+* Server - ND
+* Dashboard-frontend - ND
+* Login-frontend - ND
+* Logout-frontend - ND
+* Profile-frontend - ND
+* Chat-frontend - ND
+* Login-backend - ND
+* Logout-backend - ND
+* Profile-backend - ND
+* Login-databas - ND
+* Logout-databas - ND
+* Profile-databas - ND
+* Swipe-backend - ND
+* Chat-backend - ND
+* Help-backend - ND
 
 ## 4. Dokumentation
