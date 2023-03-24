@@ -19,7 +19,7 @@ en funktion som swipear alla till höger. Jag vill också lägga till en funktio
 prata med varandra då man inte orkar säga nej. Ens profil kommer inte innehålla vanliga personuppgifter såsom om man har hund utan saker som 
 favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla en knapp som låter en slumpa mellan 100+ nördiga pick-up-lines.
 
-### 2.2 Lista av sakre som ska göras för att projektet ska bli till
+### 2.2 Lista av saker som ska göras för att projektet ska bli till
 #### 2.2.1 Frontend
 * **Login** -> Formulär för att logga in / registrera
 * **Logout** -> Du har nu loggat ut sida
@@ -47,6 +47,12 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * **Help** -> Visar alla kortkommandon
 
 ### 2.4 Moduler
+* **Login** -> Kunna logga in
+* **Logout** -> Kunna logga ut
+* **Profile** -> Kunna skapa, uppdatera, se status samt statistik
+* **Swipe** -> Kunna swipa
+* **Messages** -> Kunna ta emot samt skicka meddelanden
+* **Server** -> Express server för att kunna göra GET, POST, DELETE och PUT requests
 
 ### 2.5 Databas
 
