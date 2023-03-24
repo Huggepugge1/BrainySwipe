@@ -21,20 +21,25 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 
 ### 2.2 Lista av sakre som ska göras för att projektet ska bli till
 #### 2.2.1 Frontend
-* **Login** -> Formulär för att logga in / registrera<br>
-* **Logout** -> Du har nu loggat ut sida<br>
-* **Dashboard** -> Man ska kunna se swipe-kort, help samt en gå till chat knapp<br>
+* **Login** -> Formulär för att logga in / registrera
+* **Logout** -> Du har nu loggat ut sida
+* **Dashboard** -> Man ska kunna se swipe-kort, help samt en gå till chat knapp
 * **Chat** -> Man kan chatta med den som du och den andra har swipat höger.
 
 #### 2.2.2 Backend
+* **Login samt logout** -> Cookie handler
+* **Profile** -> Skapa profil, kryptera lösenord, ändra profil
+* **Chat** -> Kunna chatta med varandra
+* **Swipea** -> Veta vem som swipeat vem samt autoswiper
 
 #### 2.2.3 Databas
 
 ### 2.3 Undersidor
-* **Login** -> Formulär för att logga in / registrera<br>
-* **Logout** -> Du har nu loggat ut sida<br>
-* **Dashboard** -> Man ska kunna se swipe-kort, logga ut, se help, samt en gå till chat knapp<br>
-* **Chat** -> Man kan chatta med den som du och den andra har swipat höger<br>
+* **Login** -> Formulär för att logga in / registrera
+* **Logout** -> Du har nu loggat ut sida
+* **Profile** -> Du ska kunna se och modifiera din profil
+* **Dashboard** -> Man ska kunna se swipe-kort, logga ut, se help, samt en gå till chat knapp
+* **Chat** -> Man kan chatta med den som du och den andra har swipat höger
 * **Help** -> Visar alla kortkommandon
 
 ### 2.4 Moduler
