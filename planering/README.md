@@ -17,16 +17,25 @@ Många kanske tycker att det är drygt med datingappar och datinghemsidor som in
 Jag vill göra en sida där man lätt kan skapa ett konto och börja dejta. Allting ska ha både kortkommandon och grafiska knappar samt så ska det finnas
 en funktion som swipear alla till höger. Jag vill också lägga till en funktion som gör det långsamt att swipea vänster för att få fler att 
 prata med varandra då man inte orkar säga nej. Ens profil kommer inte innehålla vanliga personuppgifter såsom om man har hund utan saker som 
-favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla en knapp som låter en slumpa mellan 100+ nörd-pick-up-lines.
+favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla en knapp som låter en slumpa mellan 100+ nördiga pick-up-lines.
 
 ### 2.2 Lista av sakre som ska göras för att projektet ska bli till
 #### 2.2.1 Frontend
+Login -> Formulär för att logga in / registrera<br>
+Logout -> Du har nu loggat ut sida<br>
+Dashboard -> Man ska kunna se swipe-kort, help samt en gå till chat knapp<br>
+Chat -> Man kan chatta med den som du och den andra har swipat höger.
 
 #### 2.2.2 Backend
 
 #### 2.2.3 Databas
 
 ### 2.3 Undersidor
+Login -> Formulär för att logga in / registrera<br>
+Logout -> Du har nu loggat ut sida<br>
+Dashboard -> Man ska kunna se swipe-kort, help samt en gå till chat knapp<br>
+Chat -> Man kan chatta med den som du och den andra har swipat höger<br>
+Help -> Visar alla kortkommandon
 
 ### 2.4 Moduler
 
