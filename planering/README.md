@@ -25,14 +25,18 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * **Logout** -> Du har nu loggat ut sida
 * **Dashboard** -> Man ska kunna se swipe-kort, help samt en gå till chat knapp
 * **Chat** -> Man kan chatta med den som du och den andra har swipat höger.
+* **Profile** -> Visa ens profil samt stats
 
 #### 2.2.2 Backend
 * **Login samt logout** -> Cookie handler
-* **Profile** -> Skapa profil, kryptera lösenord, ändra profil
+* **Profile** -> Skapa profil, kryptera lösenord, ändra profil, visa stats
 * **Chat** -> Kunna chatta med varandra
 * **Swipea** -> Veta vem som swipeat vem samt autoswiper
 
 #### 2.2.3 Databas
+* **Profiler** -> ID, användarnamn, krypterat lösenord, samt alla olika personligheter med mera
+* **Swipat** -> ID1, ID2, höger, vänster
+* **Meddelanden** -> ID1, ID2, meddelande
 
 ### 2.3 Undersidor
 * **Login** -> Formulär för att logga in / registrera
