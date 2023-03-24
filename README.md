@@ -2,7 +2,7 @@
 
 This is a dating app designed for extreme nerds.
 
-Author - Hugo Lindström
+Author - Hugo Lindström <br>
 Date - 24/3-2023
 
 ### Special functionalities
