@@ -2,6 +2,9 @@
 
 This is a dating app designed for extreme nerds.
 
+Author - Hugo Lindström
+Date - 24/3-2023
+
 ### Special functionalities
 
 * Auto swiping

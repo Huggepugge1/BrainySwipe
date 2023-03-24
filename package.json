@@ -1,0 +1,19 @@
+{
+  "name": "brainyswipe",
+  "version": "1.0.0",
+  "description": "Dating app designed for extreme nerds",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Huggepugge1/BrainySwipe.git"
+  },
+  "author": "Hugo Lindström",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Huggepugge1/BrainySwipe/issues"
+  },
+  "homepage": "https://github.com/Huggepugge1/BrainySwipe#readme"
+}
