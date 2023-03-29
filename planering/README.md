@@ -56,9 +56,17 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 
 ### 2.5 Databas
 * **Profiles** <br>
-    | ID(primary key) | name | age | favorite_physics_field | dream_university |
+    | ID(primary key)  | name      | age | favorite_physics_field | dream_university |
+    |------------------|-----------|-----|------------------------|------------------|
+    | INT32 (auto inc) | CHAR(100) | INT | CHAR(100)              | CHAR(100)        |
 * **Messages**
+    | ID(primary key)  | userID (secondary key) | content    |
+    |------------------|------------------------|------------|
+    | INT32 (auto inc) | INT                    | CHAR(1000) |
 * **Swiped**
+    | ID(primary key)  | user1ID (secondary key) | user2ID (secondary key)    | swiped |
+    |------------------|-------------------------|----------------------------|--------|
+    | INT32 (auto inc) | INT                     | INT                        | BIT    |
 
 ### 2.6 Kunskaper
 
