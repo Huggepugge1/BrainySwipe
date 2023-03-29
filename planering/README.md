@@ -64,9 +64,10 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
     |------------------|------------------------|------------|
     | INT32 (auto inc) | INT                    | CHAR(1000) |
 * **Swiped**
-    | ID(primary key)  | user1ID (secondary key) | user2ID (secondary key)    | swiped |
-    |------------------|-------------------------|----------------------------|--------|
-    | INT32 (auto inc) | INT                     | INT                        | BIT    |
+    | ID(primary key)  | user1ID (foreign key) | user2ID (foreign key) | swiped |
+    |------------------|-----------------------|-----------------------|--------|
+    | INT32 (auto inc) | INT                   | INT                   | BIT    |
+![Databas modell]("./images/dabas.png")
 
 ### 2.6 Kunskaper
 
