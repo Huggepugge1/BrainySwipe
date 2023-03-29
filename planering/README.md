@@ -26,6 +26,7 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * **Dashboard** -> Man ska kunna se swipe-kort, help samt en gå till chat knapp
 * **Chat** -> Man kan chatta med den som du och den andra har swipat höger.
 * **Profile** -> Visa ens profil samt stats
+* **Help** -> Visar alla kortkommandon
 
 #### 2.2.2 Backend
 * **Login samt logout** -> Cookie handler
@@ -44,7 +45,6 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * **Profile** -> Du ska kunna se och modifiera din profil
 * **Dashboard** -> Man ska kunna se swipe-kort, logga ut, se help, samt en gå till chat knapp
 * **Chat** -> Man kan chatta med den som du och den andra har swipat höger
-* **Help** -> Visar alla kortkommandon
 
 ### 2.4 Moduler
 * **Login** -> Kunna logga in
@@ -55,10 +55,17 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * **Server** -> Express server för att kunna göra GET, POST, DELETE och PUT requests
 
 ### 2.5 Databas
+* **Profiles**
+| ID | name | age | favorite_physics_field | dream_university |
+---------------------------------------------------------------
+* **Messages**
+* **Swiped**
 
 ### 2.6 Kunskaper
 
+
 ### 2.7 Säkerhet
+
 
 ## 3. Tidsplanering - Deadlines
 * Server - ND

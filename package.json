@@ -4,7 +4,8 @@
   "description": "Dating app designed for extreme nerds",
   "main": "index.js",
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "css": "nodemon -L -x 'sass ./public/styles/scss/index.scss ./public/styles/styles.css' -e scss,sass,html"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/Huggepugge1/BrainySwipe/issues"
   },
-  "homepage": "https://github.com/Huggepugge1/BrainySwipe#readme"
+  "homepage": "https://github.com/Huggepugge1/BrainySwipe#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "io": "^1.3.2",
+    "nodemon": "^2.0.22",
+    "sass": "^1.60.0",
+    "socket.io": "^4.6.1"
+  }
 }

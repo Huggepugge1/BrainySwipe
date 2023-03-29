@@ -1,0 +1,32 @@
+#content {
+    padding: 2em 0;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 5em;
+    
+    & > button {
+        font-size: 10em;
+        
+        background-color: #FF3333;
+        border-radius: 0.1em;
+        border: none;
+        
+        padding: 0.25em 1em;
+        max-height: 3em;
+        
+        transition: background-color 150ms ease-in-out;
+        &:hover {
+            background-color: lighten(#FF3333, 3);
+        }
+        &:active {
+            background-color: darken(#FF3333, 4);
+        }
+    }
+
+    & > #cards {
+        width: 100vw;
+        height: 50vh;
+    }
+}

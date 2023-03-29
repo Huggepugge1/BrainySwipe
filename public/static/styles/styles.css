@@ -1,0 +1,69 @@
+:root {
+  font-size: 10px;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+header {
+  font-size: 1.5rem;
+  background-color: #FF3333;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5em;
+  padding: 0.75em 3em;
+}
+header h2 {
+  color: #FFFFFF;
+  font-size: 4em;
+}
+header header > img {
+  width: 96px;
+  height: 48px;
+}
+header button {
+  font-size: 1.5em;
+  padding: 0.5em 1em;
+  background-color: rgb(90, 90, 255);
+  border-radius: 0.3em;
+  border: none;
+  transition: background-color 70ms ease-in-out;
+}
+header button:hover {
+  background-color: #6464ff;
+}
+header button:active {
+  background-color: #5050ff;
+}
+
+#content {
+  padding: 2em 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 5em;
+}
+#content > button {
+  font-size: 10em;
+  background-color: #FF3333;
+  border-radius: 0.1em;
+  border: none;
+  padding: 0.25em 1em;
+  max-height: 3em;
+  transition: background-color 150ms ease-in-out;
+}
+#content > button:hover {
+  background-color: #ff4242;
+}
+#content > button:active {
+  background-color: #ff1f1f;
+}
+#content > #cards {
+  width: 100vw;
+  height: 50vh;
+}
+
+/*# sourceMappingURL=styles.css.map */
