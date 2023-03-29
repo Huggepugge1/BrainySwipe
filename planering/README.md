@@ -49,6 +49,7 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 ### 2.4 Moduler
 * **Login** -> Kunna logga in
 * **Logout** -> Kunna logga ut
+* **Cookies** -> Kunna behålla login
 * **Profile** -> Kunna skapa, uppdatera, se status samt statistik
 * **Swipe** -> Kunna swipa
 * **Messages** -> Kunna ta emot samt skicka meddelanden
@@ -70,7 +71,7 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 ![Databas modell](./images/databas.png)
 
 ### 2.6 Kunskaper
-
+Jag kommer behöva
 
 ### 2.7 Säkerhet
 
