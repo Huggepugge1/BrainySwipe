@@ -57,9 +57,9 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 
 ### 2.5 Databas
 * **Profiles** <br>
-    | ID(primary key)  | name      | age | favorite_physics_field | dream_university |
-    |------------------|-----------|-----|------------------------|------------------|
-    | INT32 (auto inc) | CHAR(100) | INT | CHAR(100)              | CHAR(100)        |
+    | ID(primary key)  | username  | password (Hashed with SHA-256) | name      | age | favorite_physics_field | dream_university |
+    |------------------|-----------|--------------------------------|-----------|-----|------------------------|------------------|
+    | INT32 (auto inc) | CHAR(100) | CHAR(100)                      | CHAR(100) | INT | CHAR(100)              | CHAR(100)        |
 * **Messages**
     | ID(primary key)  | userID (secondary key) | content    |
     |------------------|------------------------|------------|
@@ -71,7 +71,11 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 ![Databas modell](./images/databas.png)
 
 ### 2.6 Kunskaper
-Jag kommer behöva
+* **Cookies** -> Hur fungerar de? Hur sparar man data som går att validera? [w3schools(Cookies)](https://www.w3schools.com/js/js_cookies.asp)
+* **Sessions** -> Hur fungerar de? Hur sparar man data som går att validera? [w3schools(Sessions)](https://www.w3schools.com/jsref/prop_win_sessionstorage.asp)
+* **SHA-256 in js** -> Hur kan man kryptera lösenord på ett säkert sätt? [remarkable(Generating SHA-256 hash in Javascript)]
+(https://remarkablemark.medium.com/how-to-generate-a-sha-256-hash-with-javascript-d3b2696382fd)
+* **Koppla js till MYSQL** -> Hur kopplar man ihop de? [w3schools(node.js MYSQL)](https://www.w3schools.com/nodejs/nodejs_mysql.asp)
 
 ### 2.7 Säkerhet
 
