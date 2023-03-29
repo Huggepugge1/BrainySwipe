@@ -73,27 +73,27 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 ### 2.6 Kunskaper
 * **Cookies** -> Hur fungerar de? Hur sparar man data som går att validera? [w3schools(Cookies)](https://www.w3schools.com/js/js_cookies.asp)
 * **Sessions** -> Hur fungerar de? Hur sparar man data som går att validera? [w3schools(Sessions)](https://www.w3schools.com/jsref/prop_win_sessionstorage.asp)
-* **SHA-256 in js** -> Hur kan man kryptera lösenord på ett säkert sätt? [remarkable(Generating SHA-256 hash in Javascript)](https://remarkablemark.medium.com/how-to-generate-a-sha-256-hash-with-javascript-d3b2696382fd)
+* **SHA-256 in js** -> Hur kan man kryptera lösenord på ett säkert sätt? [remarkable(Generating SHA-256 hash in Javascript](https://remarkablemark.medium.com/how-to-generate-a-sha-256-hash-with-javascript-d3b2696382fd)
 * **Koppla js till MYSQL** -> Hur kopplar man ihop de? [w3schools(node.js MYSQL)](https://www.w3schools.com/nodejs/nodejs_mysql.asp)
 
 ### 2.7 Säkerhet
 
 
 ## 3. Tidsplanering - Deadlines
-* Server - ND
-* Dashboard-frontend - ND
-* Login-frontend - ND
-* Logout-frontend - ND
-* Profile-frontend - ND
-* Chat-frontend - ND
-* Login-backend - ND
-* Logout-backend - ND
-* Profile-backend - ND
-* Login-databas - ND
-* Logout-databas - ND
-* Profile-databas - ND
-* Swipe-backend - ND
-* Chat-backend - ND
-* Help-backend - ND
+* Server - 31/3
+* Dashboard-frontend - 31/3
+* Login-frontend - 1/4
+* Logout-frontend - 1/4
+* Profile-frontend - 2/4
+* Chat-frontend - 2/4
+* Login-backend - 3/4
+* Logout-backend - 3/4
+* Profile-backend - 3/4
+* Login-databas - 3/4
+* Logout-databas - 3/4
+* Profile-databas - 3/4
+* Swipe-backend - 5/4
+* Chat-backend - 6/4
+* Keybinds - 8/4
 
 ## 4. Dokumentation
