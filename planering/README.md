@@ -55,9 +55,9 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * **Server** -> Express server för att kunna göra GET, POST, DELETE och PUT requests
 
 ### 2.5 Databas
-* **Profiles**
-| ID | name | age | favorite_physics_field | dream_university |
-|----|------|-----|------------------------|------------------|
+* **Profiles** <br>
+    | ID | name | age | favorite_physics_field | dream_university |
+    |----|------|-----|------------------------|------------------|
 * **Messages**
 * **Swiped**
 
