@@ -87,7 +87,7 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * Dashboard-frontend - 31/3
 * Login-frontend - 1/4
 * Logout-frontend - 1/4
-* Profile-frontend - 2/4
+* Profile-frontend - 1/4
 * Chat-frontend - 2/4
 * Login-backend - 3/4
 * Logout-backend - 3/4
