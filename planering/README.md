@@ -100,7 +100,7 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * Keybinds - 8/4
 
 ## 4. Dokumentation
-* **1/4-2023** Klar med front-end för dashboarden samt kan hosta en server. När jag gjorde swipe-funktionen för mina kort upptäckte jag att
+* **31/2 - 1/4** Klar med front-end för dashboarden samt kan hosta en server. När jag gjorde swipe-funktionen för mina kort upptäckte jag att
 man kunde trycka flera gånger i rad på knapparna. Detta ledde till att man swipade flera kort i taget. För att fixa det stängde jag av knapparna
 under ett antal sekunder medans korted swipades. Jag hade också problem med att skicka JSON via GET-requests. För att lösa detta läste jag på lite
-så att jag förstod vad det var jag behövde göra. Som slutlösning använde jag mig utav async och await samt .then().
+så at31/2 - 1/4rstod vad det var jag behövde göra. Som slutlösning använde jag mig utav async och await samt .then().
