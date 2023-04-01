@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "test",
-    "css": "nodemon -L -x 'sass ./public/styles/scss/index.scss ./public/styles/styles.css' -e scss,sass,html"
+    "css": "nodemon -L -x 'sass ./public/static/styles/scss/index.scss ./public/static/styles/styles.css' -e scss,sass,html"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   "dependencies": {
     "express": "^4.18.2",
     "io": "^1.3.2",
+    "json": "^11.0.0",
     "nodemon": "^2.0.22",
     "sass": "^1.60.0",
     "socket.io": "^4.6.1"

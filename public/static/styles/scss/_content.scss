@@ -1,32 +1,87 @@
 #content {
+    height: 70vh;
     padding: 2em 0;
+}
 
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 5em;
+.swipe-button {
+    font-size: 7.5rem;
     
-    & > button {
-        font-size: 10em;
-        
-        background-color: #FF3333;
-        border-radius: 0.1em;
-        border: none;
-        
-        padding: 0.25em 1em;
-        max-height: 3em;
-        
-        transition: background-color 150ms ease-in-out;
-        &:hover {
-            background-color: lighten(#FF3333, 3);
-        }
-        &:active {
-            background-color: darken(#FF3333, 4);
-        }
+    background-color: #FF3333;
+    border-radius: 0.1em;
+    border: none;
+    
+    padding: 0.25em 1em;
+    max-height: 3em;
+    
+    transition: background-color 150ms ease-in-out;
+    &:hover {
+        background-color: lighten(#FF3333, 3);
     }
+    &:active {
+        background-color: darken(#FF3333, 4);
+    }
+}
 
-    & > #cards {
-        width: 100vw;
-        height: 50vh;
+#cards {
+    width: 100vw;
+    height: 60vh;
+    position: relative;
+}
+
+.card {
+    width: 23vw;
+    height: 28vw;
+    border-radius: 0.75em;
+    border: 2px solid black;
+    background-color: rgb(255, 255, 255);
+ 
+    padding: 1em 0.5em;
+    align-items: flex-end;
+ 
+    position: absolute;
+    top: 57.5%;
+    right: 50%;
+    transition: filter 1s ease-in-out;
+    transform: translate(50%, -50%) rotate(0deg);
+    -ms-transform: translate(50%, -50%) rotate(0deg);
+
+    & > div {
+        height: max-content;
+        width: 100%;
+        float: left;
+
+        & > div > .name {
+            font-size: 2em;
+            margin: 0.2em;
+            width: max-content;
+        }
+        
+        & > div > .age {
+            font-size: 1.25em;
+            width: max-content;
+            color: #FFB52E;
+        }
+
+        & > .fpf {
+            font-size: 1.25em;
+        }
     }
+}
+
+.swipe-right {
+    transition: transform 2s ease-in-out;
+    transform: translate(400%, -80%) rotate(400deg);
+    -ms-transform: translate(400%, -80%) rotate(400deg);
+}
+
+.swipe-left {
+    transition: transform 10s ease-in-out;
+    transform: translate(-400%, -80%) rotate(-400deg);
+    -ms-transform: translate(-400%, -80%) rotate(-400deg);
+}
+
+.next-card {
+    filter: blur(0.5em);
+    transform: translate(60%, -60%)
+               scale(0.85);
 }

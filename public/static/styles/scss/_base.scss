@@ -1,8 +1,77 @@
 :root {
     font-size: 10px;
+    background-color: rgb(30, 30, 30);
+    overflow-x: hidden;
 }
 
 * {
     padding: 0;
     margin: 0;
+}
+
+.button {
+    padding: 0.5em 1em;
+    background-color: rgb(90, 90, 255);
+    border-radius: 0.3em;
+    border: none;
+
+    cursor: pointer;
+
+    transition: background-color 70ms ease-in-out,
+                color 70ms ease-in-out;
+    &:hover {
+        background-color: lighten(rgb(90, 90, 255), 2);
+    }
+    &:active {
+        background-color: darken(rgb(90, 90, 255), 2);
+    }
+}
+
+.small {
+    font-size: 1rem;
+}
+
+.medium {
+    font-size: 2rem;
+}
+
+.big {
+    font-size: 3rem;
+}
+
+.very-big {
+    font-size: 5rem;
+}
+
+.flex {
+    display: flex;
+}
+
+.flex-wrap {
+    flex-wrap: wrap;
+}
+
+.flex-wrap-none {
+    flex-wrap: none;
+}
+
+.flex-justify-center {
+    justify-content: center;
+}
+
+
+.flex-align-center {
+    align-items: center;
+}
+
+.small-gap {
+    gap: 1em;
+}
+
+.medium-gap {
+    gap: 2em;
+}
+
+.big-gap {
+    gap: 5em;
 }

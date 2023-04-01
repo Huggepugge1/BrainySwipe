@@ -1,16 +1,30 @@
 const express = require("express");
+const bodyParser = require("body-parser");
+const http = require("http");
+
 const app = express();
+const httpServer = http.Server(app);
 
-const http = require("http").Server(app);
-const io = require("socket.io")(http);
-
-io.on("connection", (socket) => {
-    console.log("En användare anslöt");
-});
+const exampleCards = [
+    {
+        name: "Hugo",
+        age: 99,
+        favoriteField: "Aerodynamics"
+    },
+    {
+        name: "Oskar",
+        age: 0,
+        favoriteField: "Gravity"
+    }
+];
 
 app.use(express.static(__dirname + "/public"));
-console.log(__dirname + "/public");
+app.use(bodyParser.urlencoded({extended: false}));
 
-http.listen(8080, () => {
+app.get("/get_cards", (req, res) => {
+    return res.json(JSON.stringify(exampleCards))
+});
+
+httpServer.listen(8080, () => {
     console.log("server running")
 });
