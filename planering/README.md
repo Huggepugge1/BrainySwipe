@@ -23,6 +23,7 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 #### 2.2.1 Frontend
 * **Login** -> Formulär för att logga in / registrera
 * **Logout** -> Du har nu loggat ut sida
+* **Register** -> Kunna registrera sig
 * **Dashboard** -> Man ska kunna se swipe-kort, help samt en gå till chat knapp
 * **Chat** -> Man kan chatta med den som du och den andra har swipat höger.
 * **Profile** -> Visa ens profil samt stats
@@ -40,8 +41,9 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * **Meddelanden** -> ID1, ID2, meddelande
 
 ### 2.3 Undersidor
-* **Login** -> Formulär för att logga in / registrera
+* **Login** -> Formulär för att logga in
 * **Logout** -> Du har nu loggat ut sida
+* **Register** -> Formulär för att skapa konto
 * **Profile** -> Du ska kunna se och modifiera din profil
 * **Dashboard** -> Man ska kunna se swipe-kort, logga ut, se help, samt en gå till chat knapp
 * **Chat** -> Man kan chatta med den som du och den andra har swipat höger
@@ -49,6 +51,7 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 ### 2.4 Moduler
 * **Login** -> Kunna logga in
 * **Logout** -> Kunna logga ut
+* **Register** -> Kunna registrera sig
 * **Cookies** -> Kunna behålla login
 * **Profile** -> Kunna skapa, uppdatera, se status samt statistik
 * **Swipe** -> Kunna swipa
@@ -87,10 +90,12 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * Dashboard-frontend - 31/3
 * Login-frontend - 1/4
 * Logout-frontend - 1/4
+* Register-frontend - 1/4
 * Profile-frontend - 1/4
 * Chat-frontend - 2/4
 * Login-backend - 3/4
 * Logout-backend - 3/4
+* Register-backend - 1/4
 * Profile-backend - 3/4
 * Login-databas - 3/4
 * Logout-databas - 3/4
@@ -103,4 +108,4 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * **31/2 - 1/4** Klar med front-end för dashboarden samt kan hosta en server. När jag gjorde swipe-funktionen för mina kort upptäckte jag att
 man kunde trycka flera gånger i rad på knapparna. Detta ledde till att man swipade flera kort i taget. För att fixa det stängde jag av knapparna
 under ett antal sekunder medans korted swipades. Jag hade också problem med att skicka JSON via GET-requests. För att lösa detta läste jag på lite
-så at31/2 - 1/4rstod vad det var jag behövde göra. Som slutlösning använde jag mig utav async och await samt .then().
+så att jag förstod vad det var jag behövde göra. Som slutlösning använde jag mig utav async och await samt .then().
