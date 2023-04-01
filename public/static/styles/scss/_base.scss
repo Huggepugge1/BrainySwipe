@@ -9,6 +9,62 @@
     margin: 0;
 }
 
+form {
+    width: 70vw;
+    height: 40vh;
+    background-color: rgb(50, 50, 60);
+
+    border-radius: 1em;
+
+    padding: 1em;
+
+    & > .input-container {
+        position: relative;
+        width: 100%;
+        height: max-content;
+        margin: 0em 10em;
+
+        & input[type=text]:focus ~ label, & input[type=password]:focus ~ label, 
+        & input[type=text]:not(:placeholder-shown) ~ label, & input[type=password]:not(:placeholder-shown) ~ label {
+            transform: translate(calc(100% - 3em), -50%);
+        }
+
+        & input[type=text]:focus ~ label, & input[type=password]:focus ~ label {
+            color: #FF3333;
+        }
+
+        & > label {
+            width: 100%;
+            position: absolute;
+            top: 50%;
+            left: 0;
+            transform: translate(1.05em, -50%);
+            transition: transform 100ms ease-in-out,
+                        color 100ms ease-in-out;
+
+            color: rgb(130, 130, 130);
+            cursor: text;
+        }
+    }
+
+    & input[type=text], & input[type=password] {
+        width: 100%;
+        height: 100%;
+        padding: 1em;
+    }
+
+    & input {
+        background-color: rgb(70, 70, 80) !important;
+        color: rgb(130, 130, 130) !important;
+
+        border-radius: 1em;
+        border: none;
+        &:focus {
+            outline: none;
+        }
+    }
+}
+
 .button {
     padding: 0.5em 1em;
     background-color: rgb(90, 90, 255);

@@ -25,6 +25,10 @@ app.get("/get_cards", (req, res) => {
     return res.json(JSON.stringify(exampleCards))
 });
 
+app.post("/login", (req, res) => {
+    console.log(req.body);
+});
+
 httpServer.listen(8080, () => {
     console.log("server running")
 });
