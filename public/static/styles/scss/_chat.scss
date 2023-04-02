@@ -1,0 +1,29 @@
+.chat {
+    display: grid;
+    grid-template-rows: 1fr 8fr;
+    grid-template-columns: 1fr 5fr;
+    grid-template-areas:
+        "sidebar profile"
+        "sidebar messages";
+
+    & > * {
+        border: 1px solid rgb(230, 230, 230);
+    }
+}
+
+#sidebar {
+    grid-area: sidebar;
+    & > h2 {
+        color: rgb(230, 230, 230);
+        font-size: 4rem;
+        padding: 0.35em;
+    }
+}
+
+#profile {
+    grid-area: profile;
+}
+
+#messages {
+    grid-area: messages;
+}

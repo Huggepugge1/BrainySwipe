@@ -32,6 +32,12 @@ app.post("/login", (req, res) => {
 
 app.post("/register", (req, res) => {
     console.log(req.body);
+    return;
+});
+
+app.post("/logout", (req, res) => {
+    console.log(req.body);
+    return res.redirect("/logout.html");
 });
 
 httpServer.listen(8080, () => {

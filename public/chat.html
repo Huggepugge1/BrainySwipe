@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="static/styles/styles.css">
     <script src="https://kit.fontawesome.com/bf7cc2096e.js" crossorigin="anonymous"></script>
-    <script src="static/js/cards.js" defer></script>
-    <title>Dashboard</title>
+    <title>Chat</title>
   </head>
   <body>
     <header class="medium flex flex-wrap-none flex-align-center">
@@ -21,18 +20,23 @@
         </div>
         <div>
             <nav class="flex flex-wrap-none flex-justify-center flex-align-center medium-gap">
-                <button class="button medium" onclick="window.location.href = '/chat.html'">chat</button>
                 <button class="button medium">help</button>
                 <button class="button medium" onclick="window.location.htef = '/profile.html'">Profile</button>
                 <button class="button medium" onclick="fetch('/logout', method='POST');">logout</button>
             </nav>
         </div>
     </header>
-    <section id="content" class="medium flex flex-wrap flex-justify-center flex-align-center big-gap">
-        <div id="cards">
-        </div>
-        <button onclick="nextCard('left')" class="button swipe-button"><i class="fa-solid fa-arrow-left fa-beat fa-xl"></i></button>
-        <button onclick="nextCard('right')" class="button swipe-button"><i class="fa-solid fa-arrow-right fa-beat fa-xl"></i></button>
+    <section id="content" class="chat">
+        <section id="sidebar">
+            <h2>Dms</h2>
+        </section>
+        <section id="profile">
+        </section>
+        <section id="messages">
+        </section>
     </section>
   </body>
 </html>
+
+
+

@@ -90,18 +90,20 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * Dashboard-frontend - 31/3
 * Login-frontend - 1/4
 * Logout-frontend - 1/4
-* Register-frontend - 1/4
-* Profile-frontend - 1/4
+* Register-frontend - 2/4
+* Profile-frontend - 2/4
 * Chat-frontend - 2/4
 * Login-backend - 3/4
 * Logout-backend - 3/4
-* Register-backend - 1/4
+* Register-backend - 3/4
 * Profile-backend - 3/4
-* Login-databas - 3/4
-* Logout-databas - 3/4
-* Profile-databas - 3/4
+* Login-databas - 4/4
+* Logout-databas - 4/4
+* Profile-databas - 4/4
 * Swipe-backend - 5/4
+* Swipe-databas - 5/4
 * Chat-backend - 6/4
+* Chat-databas - 6/4
 * Keybinds - 8/4
 
 ## 4. Dokumentation
@@ -109,3 +111,5 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 man kunde trycka flera gånger i rad på knapparna. Detta ledde till att man swipade flera kort i taget. För att fixa det stängde jag av knapparna
 under ett antal sekunder medans korted swipades. Jag hade också problem med att skicka JSON via GET-requests. För att lösa detta läste jag på lite
 så att jag förstod vad det var jag behövde göra. Som slutlösning använde jag mig utav async och await samt .then().
+
+* **1/4 - 2/4** Klar med front-end för login, logout, register samt profile. Hade inte så många problem den här gången.

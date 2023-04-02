@@ -9,48 +9,80 @@
   margin: 0;
 }
 
+#content {
+  height: 86vh;
+}
+
+h2 {
+  text-align: center;
+}
+
+a > img {
+  width: auto;
+  height: auto;
+}
+
 form {
   width: 70vw;
   height: max-content;
   background-color: rgb(50, 50, 60);
   border-radius: 1em;
-  padding: 1em;
+  padding: 2em 1em;
 }
 form > .input-container {
+  display: flex;
+  justify-content: center;
   position: relative;
   width: 100%;
   height: max-content;
-  margin: 0em 10em;
 }
-form > .input-container input[type=text]:focus ~ label, form > .input-container input[type=password]:focus ~ label, form > .input-container input[type=text]:not(:placeholder-shown) ~ label, form > .input-container input[type=password]:not(:placeholder-shown) ~ label {
-  transform: translate(calc(100% - 3em), -50%);
+form > .input-container input[type=text]:focus ~ .label-container, form > .input-container input[type=password]:focus ~ .label-container, form > .input-container input[type=text]:not(:placeholder-shown) ~ .label-container, form > .input-container input[type=password]:not(:placeholder-shown) ~ .label-container {
+  background-color: rgb(30, 30, 40);
+  transform: translate(3vw, -150%);
 }
-form > .input-container input[type=text]:focus ~ label, form > .input-container input[type=password]:focus ~ label {
+form > .input-container input[type=text]:focus ~ .label-container > label, form > .input-container input[type=password]:focus ~ .label-container > label {
   color: #FF3333;
 }
-form > .input-container > label {
-  width: 100%;
+form > .input-container > .label-container {
   position: absolute;
   top: 50%;
   left: 0;
-  transform: translate(1.05em, -50%);
-  transition: transform 100ms ease-in-out, color 100ms ease-in-out;
+  font-size: 2rem;
+  width: fit-content;
+  height: fit-content;
+  padding: 0.5em;
+  border-radius: 1em;
+  transform: translate(3vw, -50%);
+  transition: transform 100ms ease-in-out, background-color 200ms ease-in-out;
+}
+form > .input-container label {
+  font-size: 2rem;
   color: rgb(130, 130, 130);
   cursor: text;
+  transition: transform 100ms ease-in-out, color 200ms ease-in-out;
 }
 form input[type=text], form input[type=password] {
-  width: 100%;
+  width: 90%;
   height: 100%;
   padding: 1em;
 }
 form input {
   background-color: rgb(70, 70, 80) !important;
   color: rgb(130, 130, 130) !important;
+  transition: background-color 70ms ease-in-out, color 70ms ease-in-out;
   border-radius: 1em;
   border: none;
 }
 form input:focus {
   outline: none;
+}
+form input[type=submit]:hover {
+  background-color: #52525e !important;
+  color: #8f8f8f !important;
+}
+form input[type=submit]:active {
+  background-color: #41414b !important;
+  color: #7d7d7d !important;
 }
 
 .button {
@@ -93,7 +125,7 @@ form input:focus {
 }
 
 .flex-wrap-none {
-  flex-wrap: none;
+  flex-wrap: nowrap;
 }
 
 .flex-justify-center {
@@ -117,9 +149,10 @@ form input:focus {
 }
 
 header {
+  height: 10vh;
   background-color: #FF3333;
   justify-content: space-between;
-  padding: 0.75em 3em;
+  padding: 2vh 3em;
 }
 header h2 {
   color: #FFFFFF;
@@ -128,14 +161,9 @@ header h2 {
 header > div {
   width: 33vw;
 }
-header > div > img {
+header > div > a > img, header > div > img {
   width: 96px;
   height: 48px;
-}
-
-#content {
-  height: 70vh;
-  padding: 2em 0;
 }
 
 .swipe-button {
@@ -156,7 +184,7 @@ header > div > img {
 
 #cards {
   width: 100vw;
-  height: 60vh;
+  height: 55vh;
   position: relative;
 }
 
@@ -171,7 +199,7 @@ header > div > img {
   position: absolute;
   top: 57.5%;
   right: 50%;
-  transition: filter 1s ease-in-out;
+  transition: all 1s ease-in-out;
   transform: translate(50%, -50%) rotate(0deg);
   -ms-transform: translate(50%, -50%) rotate(0deg);
 }
@@ -209,6 +237,33 @@ header > div > img {
 .next-card {
   filter: blur(0.5em);
   transform: translate(60%, -60%) scale(0.85);
+}
+
+.chat {
+  display: grid;
+  grid-template-rows: 1fr 8fr;
+  grid-template-columns: 1fr 5fr;
+  grid-template-areas: "sidebar profile" "sidebar messages";
+}
+.chat > * {
+  border: 1px solid rgb(230, 230, 230);
+}
+
+#sidebar {
+  grid-area: sidebar;
+}
+#sidebar > h2 {
+  color: rgb(230, 230, 230);
+  font-size: 4rem;
+  padding: 0.35em;
+}
+
+#profile {
+  grid-area: profile;
+}
+
+#messages {
+  grid-area: messages;
 }
 
 /*# sourceMappingURL=styles.css.map */
