@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -5,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="static/styles/styles.css">
-    <title>Login</title>
+    <title>Register</title>
   </head>
   <body>
     <header class="medium flex flex-wrap-none flex-align-center">
@@ -19,7 +20,15 @@
         </div>
     </header>
     <section id="content" class="medium flex flex-wrap flex-justify-center flex-align-center big-gap">
-        <form method="POST" action="/login" class="flex flex-justify-center flex-align-center flex-wrap small-gap">
+        <form method="POST" action="/register" class="flex flex-justify-center flex-align-center flex-wrap small-gap">
+            <div class="input-container medium">
+                <input id ="firstName" name="firstName" type="text" placeholder=" " class="medium">
+                <label for="firstName" class="placeholder">First name</label>
+            </div>
+            <div class="input-container medium">
+                <input id ="lastName" name="lastName" type="text" placeholder=" " class="medium">
+                <label for="lastName" class="placeholder">Last name</label>
+            </div>
             <div class="input-container medium">
                 <input id ="username" name="username" type="text" placeholder=" " class="medium">
                 <label for="username" class="placeholder">Username</label>
@@ -28,8 +37,12 @@
                 <input id="password" name="password" type="password" placeholder=" " class="medium">
                 <label for="password" class="placeholder">Password</label>
             </div>
-            <a href="/register.html">Don't have an account yet? Register here now</a>
-            <input type="Submit" value="login" class="button big">
+            <div class="input-container medium">
+                <input id ="fpf" name="fpf" type="text" placeholder=" " class="medium">
+                <label for="fpf" class="placeholder">Favorite physics field</label>
+            </div>
+            <a href="/register.html">Already have an account? Log in here</a>
+            <input type="Submit" value="register" class="button big">
         </form>
     </section>
     <footer></footer>

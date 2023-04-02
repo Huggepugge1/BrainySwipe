@@ -27,6 +27,11 @@ app.get("/get_cards", (req, res) => {
 
 app.post("/login", (req, res) => {
     console.log(req.body);
+    return;
+});
+
+app.post("/register", (req, res) => {
+    console.log(req.body);
 });
 
 httpServer.listen(8080, () => {
