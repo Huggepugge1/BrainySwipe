@@ -8,7 +8,7 @@ const createElement = (type, classes, value, inDiv) => {
     let div;
     if (inDiv) {
         div = document.createElement("div");
-        div.className = "flex flex-justify-center flex-align-center";
+        div.className = "flex flex-align-center";
     }
     const element = document.createElement(type);
     element.className = classes;

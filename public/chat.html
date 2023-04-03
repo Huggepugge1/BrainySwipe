@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="static/styles/styles.css">
     <script src="https://kit.fontawesome.com/bf7cc2096e.js" crossorigin="anonymous"></script>
+    <script src="/static/js/chat.js" defer></script>
     <title>Chat</title>
   </head>
   <body>
@@ -27,12 +28,26 @@
         </div>
     </header>
     <section id="content" class="chat">
-        <section id="sidebar">
+        <section id="dms">
             <h2>Dms</h2>
         </section>
-        <section id="profile">
+        <section id="sidebar">
         </section>
-        <section id="messages">
+        <section id="profile">
+            <h1 id="name"></h1>
+        </section>
+        <section id="messages" class="flex flex-wrap">
+        </section>
+        <section id="send-message">
+            <form method="POST" action="/send_message" class="flex flex-justify-center flex-align-center flex-wrap medium-gap">
+                <div class="input-container medium">
+                    <input id ="send-message" name="send-message" type="text" placeholder=" " class="medium">
+                    <div class="label-container">
+                        <label for="send-message" class="placeholder">Message</label>
+                    </div>
+                </div>
+                <input type="Submit" value="Send message" class="button medium">
+            </form>
         </section>
     </section>
   </body>

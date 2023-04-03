@@ -24,7 +24,7 @@ a > img {
 
 form {
   width: 70vw;
-  height: max-content;
+  max-height: 80vh;
   background-color: rgb(50, 50, 60);
   border-radius: 1em;
   padding: 2em 1em;
@@ -195,7 +195,7 @@ header > div > a > img, header > div > img {
   border: 2px solid black;
   background-color: rgb(255, 255, 255);
   padding: 1em 0.5em;
-  align-items: flex-end;
+  align-content: flex-end;
   position: absolute;
   top: 57.5%;
   right: 50%;
@@ -206,7 +206,6 @@ header > div > a > img, header > div > img {
 .card > div {
   height: max-content;
   width: 100%;
-  float: left;
 }
 .card > div > div > .name {
   font-size: 2em;
@@ -220,6 +219,7 @@ header > div > a > img, header > div > img {
 }
 .card > div > .fpf {
   font-size: 1.25em;
+  margin-left: 0.32em;
 }
 
 .swipe-right {
@@ -241,29 +241,74 @@ header > div > a > img, header > div > img {
 
 .chat {
   display: grid;
-  grid-template-rows: 1fr 8fr;
+  grid-template-rows: 1fr 8fr 1.5fr;
   grid-template-columns: 1fr 5fr;
-  grid-template-areas: "sidebar profile" "sidebar messages";
+  grid-template-areas: "dms profile" "sidebar messages" "sidebar send-message";
 }
 .chat > * {
   border: 1px solid rgb(230, 230, 230);
 }
 
-#sidebar {
-  grid-area: sidebar;
-}
-#sidebar > h2 {
+#dms > h2 {
   color: rgb(230, 230, 230);
   font-size: 4rem;
-  padding: 0.35em;
+  padding: calc((9.5555555556vh - 46.4px) / 2) 0;
+}
+
+#sidebar {
+  grid-area: sidebar;
 }
 
 #profile {
   grid-area: profile;
 }
+#profile h1 {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  font-size: 6em;
+  color: white;
+}
 
 #messages {
   grid-area: messages;
+  align-content: flex-start;
+}
+
+#send-message {
+  grid-area: send-message;
+}
+#send-message form {
+  width: 100%;
+  background-color: rgb(30, 30, 30);
+}
+
+.message-container {
+  width: 100%;
+  height: max-content;
+  margin: 1em 2em;
+}
+.message-container .message {
+  padding: 0.75em 0.4em;
+  border-radius: 1em;
+  width: max-content;
+  height: max-content;
+}
+.message-container .recieved {
+  margin-right: auto;
+  background-color: rgb(90, 90, 255);
+}
+.message-container .sent {
+  margin-left: auto;
+  background-color: rgb(230, 230, 230);
+}
+
+.profile-button {
+  width: 100%;
+  height: max-content;
+  padding: 1em;
+  border: none;
+  margin-bottom: 0.4em;
 }
 
 /*# sourceMappingURL=styles.css.map */

@@ -31,7 +31,7 @@
     background-color: rgb(255, 255, 255);
  
     padding: 1em 0.5em;
-    align-items: flex-end;
+    align-content: flex-end;
  
     position: absolute;
     top: 57.5%;
@@ -43,7 +43,6 @@
     & > div {
         height: max-content;
         width: 100%;
-        float: left;
 
         & > div > .name {
             font-size: 2em;
@@ -59,6 +58,7 @@
 
         & > .fpf {
             font-size: 1.25em;
+            margin-left: 0.32em;
         }
     }
 }
