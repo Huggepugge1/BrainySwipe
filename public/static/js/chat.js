@@ -1,16 +1,16 @@
-const acc = "Oskar";
-
 const getMessages = async () => {
     const res = await fetch("/get_messages");
-    const json = await res.json();
-    return json;
+    return await res.json();
 };
 
 const getAccounts = (messages) => {
     let accounts = [];
     messages.forEach((message) => {
-        if (!accounts.includes(message.user1) && message.user1 !== acc) accounts.push(message.user1);
-        if (!accounts.includes(message.user2) && message.user2 !== acc) accounts.push(message.user2);
+        let inArray = false;
+        for (let account of accounts) {
+            if (account[1] === message.username) inArray = true;
+        }
+        if (!inArray) accounts.push([message.name, message.username]);
     });
     const sidebar = document.querySelector("#sidebar");
     accounts.forEach((account) => {
@@ -25,7 +25,7 @@ const createMessage = (type, classes, value) => {
     const element = document.createElement(type);
     element.className = classes;
     if (value !== "") element.innerHTML = value;
-    div.appendChild(element);   
+    div.appendChild(element);
     return div;
 };
 
@@ -34,31 +34,28 @@ const createProfileButton = (account) => {
     button.className = "medium profile-button";
     button.onclick = () => {
         let name = document.querySelector("#name");
-        name.innerHTML = account;
+        name.value = account[0];
+        let username = document.querySelector("#username");
+        username.value = account[1];
         const messageContainer = document.querySelector("#messages");
         messageContainer.replaceChildren();
-        console.log(account);
         getMessages()
             .then((messages) => {
                 messages = JSON.parse(messages);
                 messages.forEach((message) => {
-                    if (message.user1 !== acc && message.user2 !== acc) return;
-                    if (message.user1 !== account && message.user2 !== account) return;
-                    if (message.user1 === acc) messageElement = createMessage("p", "medium message sent", message.value);
-                    if (message.user2 === acc) messageElement = createMessage("p", "medium message recieved", message.value);
+                    if (message.sent) messageElement = createMessage("p", "medium message sent", message.value);
+                    else messageElement = createMessage("p", "medium message recieved", message.value);
                     messageContainer.appendChild(messageElement);
                 });
             });
     };
-    button.innerHTML = account;
+    button.innerHTML = account[0];
     return button;
-};
-
-const changeProfile = (account) => {
 };
 
 getMessages()
     .then((messages) => {
+        console.log(messages)
         messages = JSON.parse(messages);
         getAccounts(messages);
     });

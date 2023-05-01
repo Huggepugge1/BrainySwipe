@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="static/styles/styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
     <script src="https://kit.fontawesome.com/bf7cc2096e.js" crossorigin="anonymous"></script>
-    <script src="/static/js/chat.js" defer></script>
+    <script src="js/chat.js" defer></script>
     <title>Chat</title>
   </head>
   <body>
     <header class="medium flex flex-wrap-none flex-align-center">
         <div>
-            <a href="/index.html">
-                <img src="static/images/small-logo.png">
+            <a href="/">
+                <img src="images/small-logo.png">
             </a>
         </div>
         <div>
@@ -41,11 +41,12 @@
         <section id="send-message">
             <form method="POST" action="/send_message" class="flex flex-justify-center flex-align-center flex-wrap medium-gap">
                 <div class="input-container medium">
-                    <input id ="send-message" name="send-message" type="text" placeholder=" " class="medium">
+                    <input id ="message" name="message" type="text" placeholder=" " class="medium">
                     <div class="label-container">
-                        <label for="send-message" class="placeholder">Message</label>
+                        <label for="message" class="placeholder">Message</label>
                     </div>
                 </div>
+                <input type="hidden" name="user" id="username">
                 <input type="Submit" value="Send message" class="button medium">
             </form>
         </section>

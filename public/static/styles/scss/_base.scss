@@ -24,12 +24,12 @@ a > img {
 
 form {
     width: 70vw;
-    max-height: 80vh;
     background-color: rgb(50, 50, 60);
 
     border-radius: 1em;
 
     padding: 2em 1em;
+    margin: 10px;
 
     & > .input-container {
         display: flex;

@@ -19,8 +19,8 @@ const createElement = (type, classes, value, inDiv) => {
 }
 
 const createCard = (card) => {
-    const cardElement = createElement("div", "card flex flex-wrap", "", false);
-    cardElement.appendChild(createElement("p", "fpf", `Favorite physics field: ${card.favoriteField}`, true));
+    const cardElement = createElement("div", "card next-card flex flex-wrap", "", false);
+    cardElement.appendChild(createElement("p", "fpf", `Favorite physics field: ${card.fpf}`, true));
     const div = cardElement.appendChild(createElement("div", "flex name-container", "", false));
     div.appendChild(createElement("p", "name", card.name, true));
     div.appendChild(createElement("p", "age", card.age, true));
@@ -39,7 +39,6 @@ const nextCard = (dir) => {
         cards[0].className += " swipe-left";
         setTimeout(() => {cards[0].remove(); orderCards(); buttons.forEach((button) => button.disabled = false)}, 10000);
     }
-    if (cards.length > 2) cards[2].className += " next-card";
     if (cards.length > 1 && cards[1].className.includes("next-card")) cards[1].className = "card flex flex-wrap";
     return cards;
 }
@@ -62,7 +61,6 @@ getCards()
         });
         orderCards();
         cards = document.querySelectorAll(".card");
-        if (cards.length > 1) cards[1].className += " next-card";
-        if (cards.length > 0 && cards[0].className.includes("next-card")) cards[0].className = "card";
+        if (cards.length > 0) cards[0].className = "card flex flex-wrap";
     });
 
