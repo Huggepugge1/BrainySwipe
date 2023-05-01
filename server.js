@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const http = require("http");
 const { createHash, randomBytes } = require('crypto');
 
+// return hash of string (password)
 const hash = (string) => {
     return createHash('sha256').update(string).digest('hex');
 }
@@ -63,6 +64,7 @@ const inStatic = (path) => {
     return false;
 }
 
+// Interrupt get requests to check if logged in
 app.use((req, res, next) => {
     if (req.originalUrl === "/register" || req.originalUrl == "/login" || req.originalUrl === "/register.html" || req.originalUrl === "/login" || inStatic(req.originalUrl)) return next();
     if (req.cookies.auth === undefined) {
@@ -121,6 +123,58 @@ app.get("/get_cards", (req, res) => {
     return res.json(JSON.stringify(cards));
 });
 
+app.post("/login", (req, res) => {
+    for (let {username, passwordHash} of accounts) {
+            if (username === req.body.username && passwordHash === hash(req.body.password)) {
+                const auth = randomBytes(32).toString("hex");
+                loggedIn.push({username: username, auth: auth});
+                res.cookie("auth", auth);
+                return res.redirect("/");
+            }
+    }
+    return res.redirect('/login');
+});
+
+app.post("/register", (req, res) => {
+    for (let field in req.body) {
+        if (req.body.field === "") return res.redirect("/register.html");
+    }
+    accounts.push({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        age: req.body.age,
+        username: req.body.username,
+        passwordHash: hash(req.body.password),
+        fpf: req.body.fpf
+    });
+
+    return res.redirect("/login");
+});
+
+app.post("/update_profile", (req, res) => {
+    console.log(req.body);
+    let username, user;
+    for (let loggedInUser of loggedIn) {
+        if (loggedInUser.auth === req.cookies.auth) {
+            username = loggedInUser.username;
+            break;
+        }
+    }
+
+    for (let [index, currentUser] of accounts.entries()) {
+        if (currentUser.username === username) {
+            user = index;
+        }
+    }
+
+    for (let field in req.body) {
+        if (req.body[field] !== "")
+            accounts[user][field] = req.body[field];
+    }
+
+    res.redirect("/profile");
+});
+
 app.get("/get_messages", (req, res) => {
     let current_messages = [];
     let user = "";
@@ -163,34 +217,6 @@ app.get("/get_messages", (req, res) => {
         }
     }
     return res.json(JSON.stringify(current_messages));
-}); 
-
-app.post("/login", (req, res) => {
-    for (let {username, passwordHash} of accounts) {
-            if (username === req.body.username && passwordHash === hash(req.body.password)) {
-                const auth = randomBytes(32).toString("hex");
-                loggedIn.push({username: username, auth: auth});
-                res.cookie("auth", auth);
-                return res.redirect("/");
-            }
-    }
-    return res.redirect('/login');
-});
-
-app.post("/register", (req, res) => {
-    for (let field in req.body) {
-        if (req.body.field === "") return res.redirect("/register.html");
-    }
-    accounts.push({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        age: req.body.age,
-        username: req.body.username,
-        passwordHash: hash(req.body.password),
-        fpf: req.body.fpf
-    });
-
-    return res.redirect("/login");
 });
 
 app.post("/send_message", (req, res) => {
@@ -207,7 +233,7 @@ app.post("/send_message", (req, res) => {
         user2: req.body.user,
         value: req.body.message
     });
-    return res.redirect("/chat.html")
+    return res.redirect(`/chat?user=${req.body.user}`)
 });
 
 httpServer.listen(8080, () => {

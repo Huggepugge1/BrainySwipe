@@ -34,7 +34,7 @@ const createProfileButton = (account) => {
     button.className = "medium profile-button";
     button.onclick = () => {
         let name = document.querySelector("#name");
-        name.value = account[0];
+        name.innerHTML = `${account[0]} (${account[1]})`;
         let username = document.querySelector("#username");
         username.value = account[1];
         const messageContainer = document.querySelector("#messages");
@@ -49,13 +49,21 @@ const createProfileButton = (account) => {
                 });
             });
     };
-    button.innerHTML = account[0];
+    button.innerHTML = `${account[0]} (${account[1]})`;
     return button;
 };
 
 getMessages()
     .then((messages) => {
-        console.log(messages)
         messages = JSON.parse(messages);
         getAccounts(messages);
+        let params = new URLSearchParams(window.location.search);
+        let user = params.get("user");
+        if (user !== null) {
+            for (let account of document.querySelectorAll(".profile-button")) {
+                let re = new RegExp(`\(${user}\)`);
+                if (account.innerHTML.match(re))
+                    account.click();
+            }
+        }
     });

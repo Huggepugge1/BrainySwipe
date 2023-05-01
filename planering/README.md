@@ -116,4 +116,5 @@ så att jag förstod vad det var jag behövde göra. Som slutlösning använde j
 * **2/4 - 3/4** Klar med front-end för chat
 * **19/4** Klar med backend för login samt logout
 * **20/4** Klar med register-backend
-* **1/5**  
+* **1/5** Klar med profile-backend samt chat-backend (TODO: Chat auto-update för mottagna meddelanden)
+* ****
