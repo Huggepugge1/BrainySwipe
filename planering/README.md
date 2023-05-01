@@ -97,19 +97,23 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * Logout-backend - 3/4
 * Register-backend - 3/4
 * Profile-backend - 3/4
+* Chat-backend - 6/4
+* Swipe-backend - 5/4
 * Login-databas - 4/4
 * Logout-databas - 4/4
 * Profile-databas - 4/4
-* Swipe-backend - 5/4
-* Swipe-databas - 5/4
-* Chat-backend - 6/4
 * Chat-databas - 6/4
+* Swipe-databas - 5/4
 * Keybinds - 8/4
 
 ## 4. Dokumentation
-* **31/2 - 1/4** Klar med front-end för dashboarden samt kan hosta en server. När jag gjorde swipe-funktionen för mina kort upptäckte jag att
+* **31/3 - 1/4** Klar med front-end för dashboarden samt kan hosta en server. När jag gjorde swipe-funktionen för mina kort upptäckte jag att
 man kunde trycka flera gånger i rad på knapparna. Detta ledde till att man swipade flera kort i taget. För att fixa det stängde jag av knapparna
 under ett antal sekunder medans korted swipades. Jag hade också problem med att skicka JSON via GET-requests. För att lösa detta läste jag på lite
 så att jag förstod vad det var jag behövde göra. Som slutlösning använde jag mig utav async och await samt .then().
 
 * **1/4 - 2/4** Klar med front-end för login, logout, register samt profile. Hade inte så många problem den här gången.
+* **2/4 - 3/4** Klar med front-end för chat
+* **19/4** Klar med backend för login samt logout
+* **20/4** Klar med register-backend
+* **1/5**  

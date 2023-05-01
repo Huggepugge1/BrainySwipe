@@ -64,9 +64,9 @@ const inStatic = (path) => {
 }
 
 app.use((req, res, next) => {
-    if (req.originalUrl === "/register" || req.originalUrl == "/login" || req.originalUrl === "/register.html" || req.originalUrl === "/login.html" || inStatic(req.originalUrl)) return next();
+    if (req.originalUrl === "/register" || req.originalUrl == "/login" || req.originalUrl === "/register.html" || req.originalUrl === "/login" || inStatic(req.originalUrl)) return next();
     if (req.cookies.auth === undefined) {
-        return res.redirect("/login.html");
+        return res.redirect("/login");
     }
 
     for (let {username, auth} of loggedIn) {
@@ -74,26 +74,31 @@ app.use((req, res, next) => {
             return next();
         }
     }
-    return res.redirect("/login.html");
+    return res.redirect("/login");
 });
 
 app.get("/", (req, res) => {
     return res.sendFile(__dirname + "/public/index.html");
 });
 
-app.get("/login.html", (req, res) => {
+app.get("/login", (req, res) => {
     return res.sendFile(__dirname + "/public/login.html");
 });
 
-app.get("/register.html", (req, res) => {
+app.get("/logout", (req, res) => {
+    res.clearCookie("auth");
+    res.sendFile(__dirname + "/public/logout.html")
+});
+
+app.get("/register", (req, res) => {
     return res.sendFile(__dirname + "/public/register.html");
 });
 
-app.get("/profile.html", (req, res) => {
+app.get("/profile", (req, res) => {
     return res.sendFile(__dirname + "/public/profile.html");
 });
 
-app.get("/chat.html", (req, res) => {
+app.get("/chat", (req, res) => {
     return res.sendFile(__dirname + "/public/chat.html");
 });
 
@@ -169,7 +174,7 @@ app.post("/login", (req, res) => {
                 return res.redirect("/");
             }
     }
-    return res.redirect('/login.html');
+    return res.redirect('/login');
 });
 
 app.post("/register", (req, res) => {
@@ -185,7 +190,7 @@ app.post("/register", (req, res) => {
         fpf: req.body.fpf
     });
 
-    return res.redirect("/login.html");
+    return res.redirect("/login");
 });
 
 app.post("/send_message", (req, res) => {
