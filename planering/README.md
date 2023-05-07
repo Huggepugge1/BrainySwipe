@@ -107,6 +107,7 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * Keybinds - 8/4
 
 ## 4. Dokumentation
+### 4.1 Vad har jag gjort, vilka problem har uppstått
 * **31/3 - 1/4** Klar med front-end för dashboarden samt kan hosta en server. När jag gjorde swipe-funktionen för mina kort upptäckte jag att
 man kunde trycka flera gånger i rad på knapparna. Detta ledde till att man swipade flera kort i taget. För att fixa det stängde jag av knapparna
 under ett antal sekunder medans korted swipades. Jag hade också problem med att skicka JSON via GET-requests. För att lösa detta läste jag på lite
@@ -118,3 +119,11 @@ så att jag förstod vad det var jag behövde göra. Som slutlösning använde j
 * **20/4** Klar med register-backend
 * **1/5** Klar med profile-backend samt chat-backend (TODO: Chat auto-update för mottagna meddelanden)
 * ****
+
+### 4.2 Utvärdering
+### 4.3 Testning
+### 4.4 Upphovsrätt och GDPR
+### 4.5 Koden
+### 4.6 Källor
+### 4.7 Säkerhet
+### 4.8 Betyg

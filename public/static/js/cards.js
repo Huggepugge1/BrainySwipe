@@ -21,6 +21,9 @@ const createElement = (type, classes, value, inDiv) => {
 const createCard = (card) => {
     const cardElement = createElement("div", "card next-card flex flex-wrap", "", false);
     cardElement.appendChild(createElement("p", "fpf", `Favorite physics field: ${card.fpf}`, true));
+    let user = createElement("input", "", card.username, false);
+    user.setAttribute("type", "hidden");
+    cardElement.appendChild(user);
     const div = cardElement.appendChild(createElement("div", "flex name-container", "", false));
     div.appendChild(createElement("p", "name", card.name, true));
     div.appendChild(createElement("p", "age", card.age, true));
@@ -31,7 +34,17 @@ const nextCard = (dir) => {
     const cards = document.querySelectorAll(".card");
     const buttons = document.querySelectorAll(".swipe-button");
     buttons.forEach((button) => button.disabled = true);
-    if (dir === "right") { 
+    if (dir === "right") {
+        const data = {
+            user: cards[0].children[1].textContent
+        };
+        fetch("/swipe_right", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                body: JSON.stringify(data)
+            }
+        })
         cards[0].className += " swipe-right";
         setTimeout(() => {cards[0].remove(); orderCards(); buttons.forEach((button) => button.disabled = false)}, 2000);
     }

@@ -51,6 +51,8 @@ accounts = [
     }
 ]
 
+let swipes = [];
+
 let loggedIn = [];
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -116,7 +118,8 @@ app.get("/get_cards", (req, res) => {
             cards.push({
                 name: account.firstName,
                 age: account.age,
-                fpf: account.fpf
+                fpf: account.fpf,
+                username: account.username
             });
         
     }
@@ -177,7 +180,7 @@ app.post("/update_profile", (req, res) => {
 
 app.get("/get_messages", (req, res) => {
     let current_messages = [];
-    let user = "";
+    let user;
     for (let acc of loggedIn) {
         if (acc.auth === req.cookies.auth)
             user = acc.username;
@@ -234,6 +237,20 @@ app.post("/send_message", (req, res) => {
         value: req.body.message
     });
     return res.redirect(`/chat?user=${req.body.user}`)
+});
+
+app.post("/swipe_right", (req, res) => {
+    let user;
+    for (let acc of loggedIn) {
+        if (acc.auth === req.cookies.auth)
+            user = acc.username;
+    }
+    console.log(req.body)
+    swipes.push({
+        user1: user,
+        user2: req.body.user
+    })
+    return;
 });
 
 httpServer.listen(8080, () => {
