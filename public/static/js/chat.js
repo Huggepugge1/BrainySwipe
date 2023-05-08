@@ -3,15 +3,7 @@ const getMessages = async () => {
     return await res.json();
 };
 
-const getAccounts = (messages) => {
-    let accounts = [];
-    messages.forEach((message) => {
-        let inArray = false;
-        for (let account of accounts) {
-            if (account[1] === message.username) inArray = true;
-        }
-        if (!inArray) accounts.push([message.name, message.username]);
-    });
+const getAccounts = (accounts) => {
     const sidebar = document.querySelector("#sidebar");
     accounts.forEach((account) => {
         const button = createProfileButton(account);
@@ -39,10 +31,11 @@ const createProfileButton = (account) => {
         username.value = account[1];
         const messageContainer = document.querySelector("#messages");
         messageContainer.replaceChildren();
+        let messageElement;
         getMessages()
             .then((messages) => {
                 messages = JSON.parse(messages);
-                messages.forEach((message) => {
+                messages.messages.forEach((message) => {
                     if (message.sent) messageElement = createMessage("p", "medium message sent", message.value);
                     else messageElement = createMessage("p", "medium message recieved", message.value);
                     messageContainer.appendChild(messageElement);
@@ -54,9 +47,10 @@ const createProfileButton = (account) => {
 };
 
 getMessages()
-    .then((messages) => {
-        messages = JSON.parse(messages);
-        getAccounts(messages);
+    .then((messagesAndAccounts) => {
+        let { accounts, messages} = JSON.parse(messagesAndAccounts);
+        console.log(accounts)
+        getAccounts(accounts);
         let params = new URLSearchParams(window.location.search);
         let user = params.get("user");
         if (user !== null) {

@@ -38,13 +38,7 @@ const nextCard = (dir) => {
         const data = {
             user: cards[0].children[1].textContent
         };
-        fetch("/swipe_right", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-                body: JSON.stringify(data)
-            }
-        })
+        $.post("/swipe_right", data);
         cards[0].className += " swipe-right";
         setTimeout(() => {cards[0].remove(); orderCards(); buttons.forEach((button) => button.disabled = false)}, 2000);
     }
@@ -57,9 +51,9 @@ const nextCard = (dir) => {
 }
 
 const orderCards = () => {
-    cards = document.querySelectorAll(".card");
+    let cards = document.querySelectorAll(".card");
     cards.forEach((card, i) => {
-        card.style.zIndex = cards.length - i;
+        card.style.zIndex = `${cards.length - i}`;
     });
     return cards;
 }

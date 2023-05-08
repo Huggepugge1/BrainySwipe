@@ -14,23 +14,7 @@ const cookieParser = require("cookie-parser");
 app.use(cookieParser());
 const httpServer = http.Server(app);
 
-const messages = [
-    {
-        user1: "Huggepugge",
-        user2: "OGL",
-        value: "Hej Oskar"
-    },
-    {
-        user1: "OGL",
-        user2: "Oliver",
-        value: "Hej Oliver"
-    },
-    {
-        user1: "OGL",
-        user2: "Huggepugge",
-        value: "Hej Hugo"
-    }
-];
+const messages = [];
 
 accounts = [
     {
@@ -155,7 +139,6 @@ app.post("/register", (req, res) => {
 });
 
 app.post("/update_profile", (req, res) => {
-    console.log(req.body);
     let username, user;
     for (let loggedInUser of loggedIn) {
         if (loggedInUser.auth === req.cookies.auth) {
@@ -178,8 +161,43 @@ app.post("/update_profile", (req, res) => {
     res.redirect("/profile");
 });
 
+const get_account_name = (username) => {
+    for (let account of accounts)
+        if (account.username === username)
+            return account.firstName + " " + account.lastName;
+    return null;
+}
+
+const get_swipes = (user) => {
+    let current_accounts = [];
+    swipes.forEach(swipe1 => {
+        swipes.forEach(swipe2 => {
+            let inArray = false;
+            if (swipe1 !== swipe2) {
+                if (user === swipe1.user1) {
+                    if (swipe1.user1 === swipe2.user2)
+                        for (let account of current_accounts) {
+                            if (account[1] === swipe1.user2) inArray = true;
+                        }
+                    if (!inArray) current_accounts.push([get_account_name(swipe1.user2), swipe1.user2]);
+                } else if (user === swipe2.user1) {
+                    if (swipe2.user1 === swipe1.user2)
+                        for (let account of current_accounts) {
+                            if (account[1] === swipe2.user2) inArray = true;
+                        }
+                    if (!inArray) current_accounts.push([get_account_name(swipe2.user2), swipe2.user2]);
+
+                }
+            }
+        })
+    });
+    console.log(current_accounts)
+    return current_accounts;
+}
+
 app.get("/get_messages", (req, res) => {
-    let current_messages = [];
+    let currentMessages = [];
+    let currentAccounts = [];
     let user;
     for (let acc of loggedIn) {
         if (acc.auth === req.cookies.auth)
@@ -193,9 +211,14 @@ app.get("/get_messages", (req, res) => {
                 if (message.user2 === account.username) {
                     name = `${account.firstName} ${account.lastName}`;
                     username = account.username;
+                    let inArray = false;
+                    for (let account of currentAccounts) {
+                        if (account[1] === username) inArray = true;
+                    }
+                    if (!inArray) currentAccounts.push([name, username]);
                 }
             }
-            current_messages.push({
+            currentMessages.push({
                 name: name,
                 username: username,
                 sent: true,
@@ -208,18 +231,29 @@ app.get("/get_messages", (req, res) => {
                 if (message.user1 === account.username) {
                     name = `${account.firstName} ${account.lastName}`;
                     username = account.username;
+                    let inArray = false;
+                    for (let account of currentAccounts) {
+                        if (account[1] === username) inArray = true;
+                    }
+                    if (!inArray) currentAccounts.push([name, username]);
                 }
             }
-            current_messages.push({
+            currentMessages.push({
                 name: name,
                 username: username,
                 sent: false,
                 value: message.value
             });
-            // Hello World
         }
     }
-    return res.json(JSON.stringify(current_messages));
+    get_swipes(user).forEach(currentSwipesAccounts => {
+        let inArray = false;
+        for (let account of currentAccounts) {
+            if (currentSwipesAccounts[1] === account[1]) inArray = true;
+        }
+        if (!inArray) currentAccounts.push(currentSwipesAccounts);
+    });
+    return res.json(JSON.stringify({messages: currentMessages, accounts: currentAccounts}));
 });
 
 app.post("/send_message", (req, res) => {
@@ -230,7 +264,6 @@ app.post("/send_message", (req, res) => {
             break;
         }
     }
-    console.log(req.body)
     messages.push({
         user1: user1,
         user2: req.body.user,
@@ -245,12 +278,11 @@ app.post("/swipe_right", (req, res) => {
         if (acc.auth === req.cookies.auth)
             user = acc.username;
     }
-    console.log(req.body)
     swipes.push({
         user1: user,
         user2: req.body.user
     })
-    return;
+    return res.sendStatus(200);
 });
 
 httpServer.listen(8080, () => {
