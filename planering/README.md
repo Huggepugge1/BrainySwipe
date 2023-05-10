@@ -117,9 +117,11 @@ så att jag förstod vad det var jag behövde göra. Som slutlösning använde j
 * **2/4 - 3/4** Klar med front-end för chat
 * **19/4** Klar med backend för login samt logout
 * **20/4** Klar med register-backend
-* **1/5** Klar med profile-backend samt chat-backend (TODO: Chat auto-update för mottagna meddelanden)
-* **8/5** Klar med swipe-backend (TODO: samma)
-* **10/5** Klar med login-databas (TODO: samma)
+* **1/5** Klar med profile-backend samt chat-backend
+* **8/5** Klar med swipe-backend
+* **10/5** Klar med login-databas. Hade problem med att jag inte kunde skicka databasen requests. Löste det genom att använda pool istället för connect.
+* **10/5** Klar med logout-databas
+* **10/5** Klar med profile-databas
 
 ### 4.2 Utvärdering
 ### 4.3 Testning

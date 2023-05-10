@@ -86,8 +86,11 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/logout", (req, res) => {
+    pool.query(`DELETE FROM login WHERE loginhash = \"${req.cookies.auth}\"`, (err, result, fields) => {
+        if (err) throw err;
+    });
     res.clearCookie("auth");
-    res.sendFile(__dirname + "/public/logout.html")
+    return res.sendFile(__dirname + "/public/logout.html")
 });
 
 app.get("/register", (req, res) => {
@@ -124,104 +127,6 @@ app.get("/get_cards", (req, res) => {
         throw err;
     })
 });
-
-app.post("/login", (req, res) => {
-    pool.query(`SELECT * FROM accounts WHERE username = \"${req.body.username}\" AND passwordhash = \"${hash(req.body.password)}\"`, (err, accounts, fields) => {
-        if (err) throw err;
-        if (accounts.length === 1) {
-            pool.query(`SELECT id FROM login WHERE id = ${accounts[0].id}`, (err, result, fields) => {
-                if (err) throw err;
-                if (result.length > 0) {
-                    pool.query(`DELETE FROM login WHERE id = ${accounts[0].id}`, (err, result, fields) => {
-                        if (err) throw err;
-                    });
-                }
-                const auth = randomBytes(32).toString("hex");
-                pool.query(`INSERT INTO login (id, loginhash) VALUES (${accounts[0].id}, \"${auth}\")`, (err, result, fields) => {
-                    if (err) throw err;
-                    console.log(req.body.username, "has logged in");
-                    res.cookie("auth", auth);
-                    return res.redirect("/");
-                });
-            })
-        } else {
-            return res.redirect("/login")
-        }
-    });
-});
-
-app.post("/register", (req, res) => {
-    for (let field in req.body) {
-        if (req.body.field === "") return res.redirect("/register.html");
-    }
-    accounts.push({
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        age: req.body.age,
-        username: req.body.username,
-        passwordHash: hash(req.body.password),
-        fpf: req.body.fpf
-    });
-
-    return res.redirect("/login");
-});
-
-app.post("/update_profile", (req, res) => {
-    let username, user;
-    for (let loggedInUser of loggedIn) {
-        if (loggedInUser.auth === req.cookies.auth) {
-            username = loggedInUser.username;
-            break;
-        }
-    }
-
-    for (let [index, currentUser] of accounts.entries()) {
-        if (currentUser.username === username) {
-            user = index;
-        }
-    }
-
-    for (let field in req.body) {
-        if (req.body[field] !== "")
-            accounts[user][field] = req.body[field];
-    }
-
-    res.redirect("/profile");
-});
-
-const get_account_name = (username) => {
-    for (let account of accounts)
-        if (account.username === username)
-            return account.firstName + " " + account.lastName;
-    return null;
-}
-
-const get_swipes = (user) => {
-    let current_accounts = [];
-    swipes.forEach(swipe1 => {
-        swipes.forEach(swipe2 => {
-            let inArray = false;
-            if (swipe1 !== swipe2) {
-                if (user === swipe1.user1) {
-                    if (swipe1.user1 === swipe2.user2)
-                        for (let account of current_accounts) {
-                            if (account[1] === swipe1.user2) inArray = true;
-                        }
-                    if (!inArray) current_accounts.push([get_account_name(swipe1.user2), swipe1.user2]);
-                } else if (user === swipe2.user1) {
-                    if (swipe2.user1 === swipe1.user2)
-                        for (let account of current_accounts) {
-                            if (account[1] === swipe2.user2) inArray = true;
-                        }
-                    if (!inArray) current_accounts.push([get_account_name(swipe2.user2), swipe2.user2]);
-
-                }
-            }
-        })
-    });
-    console.log(current_accounts)
-    return current_accounts;
-}
 
 app.get("/get_messages", (req, res) => {
     let currentMessages = [];
@@ -284,19 +189,116 @@ app.get("/get_messages", (req, res) => {
     return res.json(JSON.stringify({messages: currentMessages, accounts: currentAccounts}));
 });
 
-app.post("/send_message", (req, res) => {
-    let user1;
-    for (let user of loggedIn) {
-        if (user.auth === req.cookies.auth) {
-            user1 = user.username;
-            break;
+app.post("/login", (req, res) => {
+    pool.query(`SELECT * FROM accounts WHERE username = \"${req.body.username}\" AND passwordhash = \"${hash(req.body.password)}\"`, (err, accounts, fields) => {
+        if (err) throw err;
+        if (accounts.length === 1) {
+            pool.query(`SELECT loginhash FROM login WHERE loginhash = \"${req.cookies.auth}\"`, (err, result, fields) => {
+               if (err) throw err;
+                if (result.length > 0) {
+                    pool.query(`DELETE FROM login WHERE loginhash = \"${req.cookies.auth}\"`, (err, result, fields) => {
+                        if (err) throw err;
+                    });
+                }
+                pool.query(`SELECT id FROM login WHERE id = ${accounts[0].id}`, (err, result, fields) => {
+                    if (err) throw err;
+                    if (result.length > 0) {
+                        pool.query(`DELETE FROM login WHERE id = ${accounts[0].id}`, (err, result, fields) => {
+                            if (err) throw err;
+                        });
+                    }
+                    const auth = randomBytes(32).toString("hex");
+                    pool.query(`INSERT INTO login (id, loginhash) VALUES (${accounts[0].id}, \"${auth}\")`, (err, result, fields) => {
+                        if (err) throw err;
+                        console.log(req.body.username, "has logged in");
+                        res.cookie("auth", auth);
+                        return res.redirect("/");
+                    });
+                });
+            });
+        } else {
+            return res.redirect("/login")
         }
-    }
-    messages.push({
-        user1: user1,
-        user2: req.body.user,
-        value: req.body.message
     });
+});
+
+app.post("/register", (req, res) => {
+    for (let field in req.body) {
+        if (req.body.field === "") return res.redirect("/register.html");
+    }
+    accounts.push({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        age: req.body.age,
+        username: req.body.username,
+        passwordHash: hash(req.body.password),
+        fpf: req.body.fpf
+    });
+
+    return res.redirect("/login");
+});
+
+app.post("/update_profile", (req, res) => {
+    getId(req.cookies.auth).then((id) => {
+        id = id.id;
+        getAccounts().then((accounts) => {
+            for (let field in req.body)
+                if (req.body[field] !== "") {
+                    if (field === "age")
+                        if (typeof(req.body[field]) !== "number" && req.body[field] === Math.floor(req.body[field]))
+                            pool.query(`UPDATE accounts SET ${field} = \"${req.body[field]}\" WHERE id = ${id}`, (err, result, fields) => {
+                                if (err) throw err;
+                            });
+                    else
+                        pool.query(`UPDATE accounts SET ${field} = \"${req.body[field]}\" WHERE id = ${id}`, (err, result, fields) => {
+                            if (err) throw err;
+                        });
+                }
+            }).catch((err) => {
+                throw err
+        }).catch((err) => {
+            throw err
+        });
+    });
+
+    res.redirect("/profile");
+});
+
+const get_swipes = (user) => {
+    let current_accounts = [];
+    swipes.forEach(swipe1 => {
+        swipes.forEach(swipe2 => {
+            let inArray = false;
+            if (swipe1 !== swipe2) {
+                if (user === swipe1.user1) {
+                    if (swipe1.user1 === swipe2.user2)
+                        for (let account of current_accounts) {
+                            if (account[1] === swipe1.user2) inArray = true;
+                        }
+                    if (!inArray) current_accounts.push([get_account_name(swipe1.user2), swipe1.user2]);
+                } else if (user === swipe2.user1) {
+                    if (swipe2.user1 === swipe1.user2)
+                        for (let account of current_accounts) {
+                            if (account[1] === swipe2.user2) inArray = true;
+                        }
+                    if (!inArray) current_accounts.push([get_account_name(swipe2.user2), swipe2.user2]);
+
+                }
+            }
+        })
+    });
+    console.log(current_accounts)
+    return current_accounts;
+}
+
+
+app.post("/send_message", (req, res) => {
+    getId(req.cookies.auth).then((id) => {
+        id = id.id;
+        pool.query(`INSERT INTO messages (id1, id2, message) VALUES (${id}, ${req.body.username}, ${req.body.message}`, (err) => {
+            if (err) throw err;
+        });
+    })
     return res.redirect(`/chat?user=${req.body.user}`)
 });
 
