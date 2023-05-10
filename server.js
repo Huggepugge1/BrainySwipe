@@ -2,42 +2,55 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const http = require("http");
 const { createHash, randomBytes } = require('crypto');
+const mysql = require('mysql');
+
+const pool = mysql.createPool({
+    connectionLimit: 100,
+    host: "localhost",
+    user: "root",
+    password: "JagGillarDatabaser",
+    database: "brainyswipe",
+    debug: false
+});
+
 
 // return hash of string (password)
 const hash = (string) => {
     return createHash('sha256').update(string).digest('hex');
 }
 
+const getId = (auth) => {
+    return new Promise((resolve, reject) => {
+        pool.query(`SELECT id FROM login WHERE loginhash = \"${auth}\"`, (err, result, fields) => {
+            if (err) throw err;
+            resolve(result[0])
+        });
+    });
+}
+
+const getAccounts = () => {
+    return new Promise((resolve, reject) => {
+        pool.query('SELECT * FROM accounts', (err, result, fields) => {
+            if (err) throw err;
+            resolve(result)
+        });
+    });
+}
+
 const app = express();
 
 const cookieParser = require("cookie-parser");
+const {renderSync} = require("sass");
 app.use(cookieParser());
 const httpServer = http.Server(app);
 
 const messages = [];
 
-accounts = [
-    {
-        firstName: "Hugo",
-        lastName: "Lindström",
-        age: 99,
-        username: "Huggepugge",
-        passwordHash: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
-        fpf: "Aerodynamics"
-    },
-    {
-        firstName: "Oskar",
-        lastName: "Lindgren",
-        age: 0,
-        username: "OGL",
-        passwordHash: "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8",
-        fpf: "gravity"
-    }
-]
-
 let swipes = [];
 
 let loggedIn = [];
+
+// INSERT INTO brainyswipe.accounts (firstname, lastname, age, username, passwordhash, fpf) VALUES ("Oskar", "Lindgren", 12, "OGL", "5e884898da28047151d0e56f8dc6292773603d0d6aabbdd62a11ef721d1542d8", "Gravity")
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + "/public/static"));
@@ -57,12 +70,11 @@ app.use((req, res, next) => {
         return res.redirect("/login");
     }
 
-    for (let {username, auth} of loggedIn) {
-        if (auth === req.cookies.auth) {
-            return next();
-        }
-    }
-    return res.redirect("/login");
+    return pool.query(`SELECT * FROM login WHERE loginhash = \"${req.cookies.auth}\"`, (err, result, fields) => {
+        if (err) throw err;
+        if (result.length === 0) return res.redirect("/login");
+        else return next();
+    });
 });
 
 app.get("/", (req, res) => {
@@ -91,35 +103,51 @@ app.get("/chat", (req, res) => {
 });
 
 app.get("/get_cards", (req, res) => {
-    let cards = [];
-    let user = "";
-    for (let acc of loggedIn) {
-        if (acc.auth === req.cookies.auth)
-            user = acc.username;
-    }
-    for (let account of accounts) {
-        if (account.username != user)
-            cards.push({
-                name: account.firstName,
-                age: account.age,
-                fpf: account.fpf,
-                username: account.username
-            });
-        
-    }
-    return res.json(JSON.stringify(cards));
+    getId(req.cookies.auth).then((id) => {
+        id = id.id;
+        getAccounts().then((accounts) => {
+            let cards = [];
+            for (let account of accounts) {
+                if (account.id !== id)
+                    cards.push({
+                        name: account.firstname,
+                        age: account.age,
+                        fpf: account.fpf,
+                        username: account.username
+                    });
+            }
+            return res.json(JSON.stringify(cards));
+        }).catch((err) => {
+            throw err;
+        });
+    }).catch((err) => {
+        throw err;
+    })
 });
 
 app.post("/login", (req, res) => {
-    for (let {username, passwordHash} of accounts) {
-            if (username === req.body.username && passwordHash === hash(req.body.password)) {
+    pool.query(`SELECT * FROM accounts WHERE username = \"${req.body.username}\" AND passwordhash = \"${hash(req.body.password)}\"`, (err, accounts, fields) => {
+        if (err) throw err;
+        if (accounts.length === 1) {
+            pool.query(`SELECT id FROM login WHERE id = ${accounts[0].id}`, (err, result, fields) => {
+                if (err) throw err;
+                if (result.length > 0) {
+                    pool.query(`DELETE FROM login WHERE id = ${accounts[0].id}`, (err, result, fields) => {
+                        if (err) throw err;
+                    });
+                }
                 const auth = randomBytes(32).toString("hex");
-                loggedIn.push({username: username, auth: auth});
-                res.cookie("auth", auth);
-                return res.redirect("/");
-            }
-    }
-    return res.redirect('/login');
+                pool.query(`INSERT INTO login (id, loginhash) VALUES (${accounts[0].id}, \"${auth}\")`, (err, result, fields) => {
+                    if (err) throw err;
+                    console.log(req.body.username, "has logged in");
+                    res.cookie("auth", auth);
+                    return res.redirect("/");
+                });
+            })
+        } else {
+            return res.redirect("/login")
+        }
+    });
 });
 
 app.post("/register", (req, res) => {
