@@ -174,6 +174,7 @@ app.get("/get_messages", (req, res) => {
                     for (let swipe of swipes) {
                         if (swipe.userid1 === id) {
                             for (let swipe2 of swipes) {
+                                console.log(swipe, swipe2)
                                 if (swipe2.userid2 === id && swipe.userid2 === swipe2.userid1) {
                                     let account = getAccount(accounts, swipe.userid2);
                                     ret.accounts.push({
@@ -186,7 +187,7 @@ app.get("/get_messages", (req, res) => {
                     }
                     ret.accounts = ret.accounts.filter((account, i) => {
                         let index = 0;
-                        for (let acc of accounts) {
+                        for (let acc of ret.accounts) {
                             if (acc.username === account.username)
                                 return (index === i);
                             index++;
