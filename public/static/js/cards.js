@@ -36,7 +36,7 @@ const nextCard = (dir) => {
     buttons.forEach((button) => button.disabled = true);
     if (dir === "right") {
         const data = {
-            user: cards[0].children[1].textContent
+            username: cards[0].children[1].textContent
         };
         $.post("/swipe_right", data);
         cards[0].className += " swipe-right";

@@ -122,11 +122,71 @@ så att jag förstod vad det var jag behövde göra. Som slutlösning använde j
 * **10/5** Klar med login-databas. Hade problem med att jag inte kunde skicka databasen requests. Löste det genom att använda pool istället för connect.
 * **10/5** Klar med logout-databas
 * **10/5** Klar med profile-databas
+* **11/5** Klar med register-databas samt chat-databas
+* **17/5** Klar med swipes-databas
 
 ### 4.2 Utvärdering
+Min planering fungerade ganska bra. Det största problemet var att jag hade planerat in för mycket. Jag hann till exempel inte med att lägga till hotkeys till hemsidan.
+Jag hade också problem med "fetch" funktionen som jag tänkte använda i början av projektet. Jag lyckades inte skicka data. Jag löste detta genom att använda mig av forms med requests on submit
+samt Jquerys $.post(). I början av projektet trodde jag att jag skulle kunna använda mig utav express's static hosting. Detta gick inte då jag behövde kolla att användaren var inloggad innan
+jag skickade tillbaka sidan. För att lösa detta routade jag manuellt genom att ge varje HTML-fil varsin url. Jag tänkte först att jag skulle göra klart projektet snabbt. Detta hände inte.
+
 ### 4.3 Testning
+
+
 ### 4.4 Upphovsrätt och GDPR
+Jag använder inga bilder som jag tagit från internet. För att regristrera sig måste man klicka i rutan "Accept Cookies". Detta är allt jag behöver göra då jag inte tar någon mer information
+från användaren samt jag inte använder några bilder jag tagit från internet.
+
 ### 4.5 Koden
+Koden består av tre huvudsakliga delar, frontend, backend samt servern.
+
+#### 4.5.1 Frontend
+Frontenden består av HTML samt css. All css är skriven i scss och sedan kompilerad ner till en stor CSS-fil. Jag använder mig av SCSS istället för CSS eftersom scss gör det lättare att dela 
+upp koden i filer, har stöd för variabler samt kan nästa block. CSS har stöd för variabler, men bara i root medan SCSS kan ha de överallt. SCSS kan dessutom nästa block. Detta gör syntaxen
+lättare att förstå när man till exempel vill att något ska hända endast om dess förälder har en viss klass.
+
+HTML-koden använder sig av forms. Forms gör det lätt att skicka information från många olika element i en requests via body.
+Genom att sätta "name" attributen kan man ta emot requesten och läsa av innehållet av ett element genom `req.body[name]` där name är värdet av name attributen hos HTML-elementet.
+Att använda sig av en form ger också möjligheten att klicka på enter för att skicka medelandet, logga in med mera.
+
+#### 4.5.2 Backend
+Backend består av två JS filer, chat.js samt cards.js.
+
+#### 4.5.2.1 chat.js
+Chat.js tar hand om allt som har med chat-funktionen och göra. Chat.js är scriptet som läser in informationen från servern om alla meddelanden användaren har fått 
+samt användare som användaren kan prata med. Chat.js ser även till att ta bort alla potentiella taggar från meddelanden för att minimera risken för XSS.
+Chat.js har också hand om auto-pickupline funktionen. Den väljer bara en random pickupline från en lista och sätter värdet av meddelandet den ska skicka till pickuplinen.
+
+#### 4.5.2.2 cards.js
+cards.js är både frontend och backend. Detta eftersom den både skapar och animerar kort, men även tar in information från servern.
+
+#### 4.5.3 Server
+Servern består av en del funktioner. Huvudfunktionen är att skicka information till användaren. Detta gör den genom express.static samt app.get(). 
+express.static hostar static mappen. I static mappen ligger filer som inte spelar någon roll om användaren är inloggad eller inte.
+app.get() använder jag för att kunna gå mellan requesten och responsen. De sidor som inte ska kunna laddas om man inte är inloggade kan inte vara
+static hostade, då laddas de automatiskt. Istället säger man, "Om en request kommer hit, kolla om användaren är inloggad först".
+Om användaren är inloggad kommer sidan laddas, annars skickar man login-sidan. app.get() kan användas för mer än att bara skicka sidor, till exempel
+använder jag det för att skicka JSON-data.
+
+Servern använder sig även av app.post() för att man ska kunna ladda upp information på sidan.
+
+Servern är även sidan som använder sig av SQL-kopplingen. SQL-databasen kopplas till hemsidan via mysql.createPool().
+Poolen gör så att jag kan skicka många saker till databasen samtidigt.
+
+Servern har även en funktion som heter "hash()". hash() är en funktion som bildar en sha-256 hash av lösenord och authentication-tokens.
+Hash är en matematisk funktion som bara fungerar åt en hållet. Detta gör att man inte kan räkna ut vad lösenordet borde vara.
+
 ### 4.6 Källor
+Jag har inte använt mig av någon annan tutorial än de som finns i planeringsdelen.
+
 ### 4.7 Säkerhet
+Koden är inte helt säker. Till exempel är SQL injection en möjlighet. Dock har inte jag lyckats komma igenom. Chat funktionen är inte heller sårbar mot xss
+då jag tar bort alla taggar.
+
 ### 4.8 Betyg
+Mit projekt tar med databaser på några olika sätt. Projektet använder sig av en express-server som använder sig av både en statisk mapp samt en del egenkonstruerade URLs.
+Detta har jag gjort för att kunna gå emellan requesten och kolla om användren är inloggad. Jag använder mig även av forms för att skicka requests samt cookies för att loggas in,
+vilket vi inte har gått igenom hur man använder.
+
+Jag tycker jag förtjänar ett B då jag har gjort saker vi inte nödvändigtvis har fått reda på hur vi ska göra.
