@@ -71,7 +71,8 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
     | ID(primary key)  | user1ID (foreign key) | user2ID (foreign key) | swiped |
     |------------------|-----------------------|-----------------------|--------|
     | INT32 (auto inc) | INT                   | INT                   | BIT    |
-![Databas modell](./images/databas.png)
+
+* ![Databas modell](./images/databas.png)
 
 ### 2.6 Kunskaper
 * **Fetch** -> Göra requests med fetch. [mozzila (fetch)](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
@@ -81,9 +82,9 @@ favoritdel av fysik eller drömuniversitet. Chatfunktionen ska även innehålla 
 * **Koppla js till MYSQL** -> Hur kopplar man ihop de? [w3schools (node.js MYSQL)](https://www.w3schools.com/nodejs/nodejs_mysql.asp)
 
 ### 2.7 Säkerhet
-* **Lönsenord** -> Jag kommer använda mig utav SHA-256 för att kryptera lösenord så att man inte kan se klartext i databasen.
-* **SQL injection** -> Jag kommer med största sannolikhet behöva sanitera data eller liknande
-* **XSS (Cross site scripting)** -> Jag kommer med största sannolikhet behöva sanitera data eller liknande
+* **Lösenord** -> Jag kommer använda mig utav SHA-256 för att kryptera lösenord så att man inte kan se klartext i databasen.
+* **SQL injection** -> Jag kommer med största sannolikhet behöva sanera data eller liknande
+* **XSS (Cross site scripting)** -> Jag kommer med största sannolikhet behöva sanera data eller liknande
 
 ## 3. Tidsplanering - Deadlines
 * Server - 31/3
@@ -130,9 +131,17 @@ Min planering fungerade ganska bra. Det största problemet var att jag hade plan
 Jag hade också problem med "fetch" funktionen som jag tänkte använda i början av projektet. Jag lyckades inte skicka data. Jag löste detta genom att använda mig av forms med requests on submit
 samt Jquerys $.post(). I början av projektet trodde jag att jag skulle kunna använda mig utav express's static hosting. Detta gick inte då jag behövde kolla att användaren var inloggad innan
 jag skickade tillbaka sidan. För att lösa detta routade jag manuellt genom att ge varje HTML-fil varsin url. Jag tänkte först att jag skulle göra klart projektet snabbt. Detta hände inte.
+Databasen ser inte riktigt ut som jag tänkt i planeringen. Det första jag ändrade var att man kan swipea vänster på folk hur många gånger som helst.
+Hemsidan är gjord så att det ska vara så jobbigt att swipea vänster som möjligt. Genom att man påminns om personen om och om igen swipear användaren höger någon gång.
+Jag lade även till en tabell, login. Detta för att jag insåg hur authentication med cookies fungerade.
 
 ### 4.3 Testning
-
+* **Farmor**: "Jag förstår inte vad man ska ha den till"
+* **Casper**: "Hugos hemisda är väldigt cool 😎"
+* **Oskar**: "Den kommer hjälpa min få flera fruar, det är coolt att man kan skriva med folk och det är coola anmimationer"
+* **Oliver**: "Auto pick up line grejen är kul"
+* **Elias**: "Den är häpnadsväckande"
+* **Ben**: "Det är jobbigt att swipen till vänster går så långsamt"
 
 ### 4.4 Upphovsrätt och GDPR
 Jag använder inga bilder som jag tagit från internet. För att regristrera sig måste man klicka i rutan "Accept Cookies". Detta är allt jag behöver göra då jag inte tar någon mer information
@@ -174,17 +183,53 @@ Servern använder sig även av app.post() för att man ska kunna ladda upp infor
 Servern är även sidan som använder sig av SQL-kopplingen. SQL-databasen kopplas till hemsidan via mysql.createPool().
 Poolen gör så att jag kan skicka många saker till databasen samtidigt.
 
-Servern har även en funktion som heter "hash()". hash() är en funktion som bildar en sha-256 hash av lösenord och authentication-tokens.
-Hash är en matematisk funktion som bara fungerar åt en hållet. Detta gör att man inte kan räkna ut vad lösenordet borde vara.
+Servern har även en funktion som heter "hash()". hash() är en funktion som bildar en sha-256 hash av lösenord så att lösenordet inte står med klartext
+i databasen. Hash funktinoen används också för att skapa authentication-tokens så att man kan logga in.
+Hash är en matematisk funktion som bara fungerar åt en hållet. Detta gör att man inte kan räkna ut vad lösenordet borde vara, utan man måste gissa sig fram.
+Om lösenordet är bra nog är detta inte möjligt då man skulle behöva göra så pass många gissningar att det skulle ta för lång tid.
 
-### 4.6 Källor
+### 4.6 Databasen
+Databasen jag har använt är MYSQL. Jag har skapat ett schema som heter `brainyswipe`.
+I schemat har jag fyra tabeller, `accounts`, `login`, `messages` samt `swipes`.
+
+#### 4.6.1 Accounts
+Accounts är en tabell som innehåller informationen om alla användare. Varje användare har ID, firstName, lastName, age, username, passwordHash 
+samt användarens fpf (favorite physics field). 
+ID är en primärnyckel. Ett problem med denna databas är att flera användare kan ha samma användarnamn. Detta leder till att
+fler än en person kan läsa meddelande. Detta beror på att meddelanden använder användarnamn istället för ID. För att fixa det kan man använda ID för att 
+särskilja användare eller så kan man göra så att bara en person kan ha ett användarnamn.
+
+![Accounts - Databas](./images/accounts.png)
+
+#### 4.6.2 Login
+Login tabellen innehåller tre kolumner, ID, userID samt auth. ID är primärnyckeln, userID är den inloggades användarID, auth är en 
+athentication-token som användaren bär som cookie. Cookien jämförs senare med varje authentication-token för att se om den tillhör någon inloggad
+och vem.
+
+![Login - Databas](./images/login.png)
+
+#### 4.6.3 Messages
+Messages är en tabell som innehåller ett ID, ett userID1, ett userID2 samt ett message. ID är för varsitt meddelande, userID1 är för användaren som skickade
+meddelandet, userID2 är för användaren som tog emot meddelandet och message är innehållet av meddelandet.
+
+![Messages - Databas](./images/messages.png)
+
+#### 4.6.4 Swipes
+Swipes tabellen innehåller tre kolumner, ID, userID1 och userID2. userID1 är den som swipeade höger och userID2 är den som blev swipead.
+Denna tabell är också den som bestämmer vilka användare som kan skicka meddelanden till varandra.
+Om båda personerna (userID1 och userID2) har swipeat varandra till höger kommer de kunna skicka varandra meddelanden.
+
+![Swipes](./images/swipes.png)
+
+### 4.7 Källor
 Jag har inte använt mig av någon annan tutorial än de som finns i planeringsdelen.
 
-### 4.7 Säkerhet
+### 4.8 Säkerhet
 Koden är inte helt säker. Till exempel är SQL injection en möjlighet. Dock har inte jag lyckats komma igenom. Chat funktionen är inte heller sårbar mot xss
-då jag tar bort alla taggar.
+då jag tar bort alla taggar. Lösenorden är krypterade med SHA-256. Detta betyder att det inte går att räkna ut vad lösenordet är. Det går fortfarande att 
+gissa sig fram dock, men så länge lösenordet är bra nog från användarens sida blir detta svårt.
 
-### 4.8 Betyg
+### 4.9 Betyg
 Mit projekt tar med databaser på några olika sätt. Projektet använder sig av en express-server som använder sig av både en statisk mapp samt en del egenkonstruerade URLs.
 Detta har jag gjort för att kunna gå emellan requesten och kolla om användren är inloggad. Jag använder mig även av forms för att skicka requests samt cookies för att loggas in,
 vilket vi inte har gått igenom hur man använder.
