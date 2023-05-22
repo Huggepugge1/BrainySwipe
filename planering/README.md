@@ -136,12 +136,16 @@ Hemsidan är gjord så att det ska vara så jobbigt att swipea vänster som möj
 Jag lade även till en tabell, login. Detta för att jag insåg hur authentication med cookies fungerade.
 
 ### 4.3 Testning
+#### 4.3.1 Personer
 * **Farmor**: "Jag förstår inte vad man ska ha den till"
 * **Casper**: "Hugos hemisda är väldigt cool 😎"
 * **Oskar**: "Den kommer hjälpa min få flera fruar, det är coolt att man kan skriva med folk och det är coola anmimationer"
 * **Oliver**: "Auto pick up line grejen är kul"
 * **Elias**: "Den är häpnadsväckande"
 * **Ben**: "Det är jobbigt att swipen till vänster går så långsamt"
+
+#### 4.3.2 Testning i webbläsare
+Fungerar i Firefox, chrome, brave, safari samt opera GX.
 
 ### 4.4 Upphovsrätt och GDPR
 Jag använder inga bilder som jag tagit från internet. För att regristrera sig måste man klicka i rutan "Accept Cookies". Detta är allt jag behöver göra då jag inte tar någon mer information
